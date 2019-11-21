@@ -11,13 +11,17 @@ class Resa {
 		this.beforeForm = $("#consigne-avant-resa"); 
 		this.formName = this.form.find("#name"); 
 		this.formFirstName = this.form.find("#firstname"); 
+		this.intervalResa = null;
+		this.stopTimer = null;
 		this.regexResa = /......../;
 		this.documentHeight = $(document).height();
 		this.initSettings();
 	}; 
 
 	initSettings() {
-		window.addEventListener('DOMContentLoaded', function() { 
+
+		// window.addEventListener('DOMContentLoaded', function() { 
+		$(document).ready(($) =>{	
 
 			if (!localStorage.name) { 
 				console.log("nom manquant"); 
@@ -103,8 +107,8 @@ class Resa {
 				// fin du décompte
 				if (distance < 0) { 
 					clearInterval(this.intervalResa); 
-					document.getElementById("message-confirmation").css("display", "none"); 
-					document.getElementById("resa-expiree").css("display", "block"); 
+					$("#message-confirmation").css("display", "none"); 
+					$("#resa-expiree").css("display", "block"); 
 					sessionStorage.clear(); 
 				};
 			}, 1000);
