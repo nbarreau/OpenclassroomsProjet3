@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Velo'VV Lyon</title>
+        <meta property="og:title" content="Vélo'VV Lyon - Réservez votre vélo en libre service à Lyon" />
+        <meta name="description" content="Consultez notre carte de location de vélos sur Lyon et réservez votre vélo dans la station de votre choix." />
+        <meta property="og:description" content="Consultez notre carte de location de vélos sur Lyon et réservez votre vélo dans la station de votre choix." />
+        <link rel="icon" type="image/icon" href="img/velo.ico"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Kalam:400,700&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="style-min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" 
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    </head>
+
+    <body>
+        <!-- container prend toute la largeur de la page -->
+        <div class="container-fluid"> 
+            <!-- HEADER -->
+            <header class="row">
+                <div class="col-md-3">
+                    <img id="logo" src="img/logo.png" alt="logo">
+                </div>
+                <div class="col-md-9">
+                    <h1>Réservation de vélo en libre service à Lyon</h1>
+                </div>
+            </header>
+            <!-- SECTION DIAPORAMA -->
+            <div class="container-fluid diapo">
+                <div class="row"> 
+                    <div class="col-md-12" id="diapo-container">
+                        <!-- slides -->
+                        <div class="slide">           
+                            <p class="slider-text slider-item"><span>1</span> Cliquez sur la station de votre choix.</p>
+                            <svg id="slide1-background"></svg>
+                            <img class="slider-item" src="img/stations.png" alt="copie d'écran de carte des stations de vélos à Lyon"/>
+                        </div>
+                        <div class="slide">                                        
+                            <p class="slider-text slider-item"><span>2</span> Effectuez votre réservation en remplissant le formulaire.</p>                    
+                            <img class="slider-item" src="img/ordi.jpg" alt="Réservation de votre vélo en remplissant le formulaire"/>
+                        </div>
+                        <div class="slide">                                        
+                            <p class="slider-text slider-item"><span>3</span> Signez pour confirmer votre réservation.</p>                    
+                            <img class="slider-item" src="img/pen.jpg" alt="Réservation de votre vélo en remplissant le formulaire"/>
+                        </div>
+                        <div class="slide">                                          
+                            <p class="slider-text slider-item"><span>4</span> Votre vélo est reservé pendant 20 minutes.</p>                     
+                            <img class="slider-item" src="img/velo.jpg" alt="Récupération de votre vélo dans la station choisie"/>
+                        </div>
+                        <!-- boutons prev, next et pause -->
+                        <a href="#void" class="slider-control arrow-button" id="slider-prev" title="Slide précédente"><span class="fas fa-angle-left icone"></span></a>
+                        <a href="#void" class="slider-control arrow-button" id="slider-next" title="Slide suivante"><span class="fas fa-angle-right icone"></span></a>
+                        <a href="#void" class="slider-control" id="slider-pause" title="Pause/Lecture"><span class="fas fa-pause icone"></span></a>
+                        <!-- barre de progression -->
+                        <div id="progressbar-container">
+                            <div class="progressbar" data-percent="100%"></div>
+                        </div>
+                        <!-- points sous le slider -->
+                        <div id="slider-dots">
+                            <a href="#void" class="dot firstdot" title="Première slide"></a>
+                            <a href="#void" class="dot seconddot" title="Deuxème slide"></a>
+                            <a href="#void" class="dot thirddot" title="Troisième slide"></a>
+                            <a href="#void" class="dot thirddot" title="Dernière slide"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SECTION MAP ET RESA-->
+            <!-- container de la map + encart de resa-->
+            <div class="row" id="panneau-map-container">
+                <!-- map-->
+                <div class="col-md-7 col-sm-12" id="map-container">
+                    <div id="map"></div>
+                </div>
+                <!-- message avant la resa et resa-->
+                <div class="col-md-5 col-sm-12" id="resa-container">
+                    <!-- explications avant la resa-->
+                    <div id="consigne-avant-resa">
+                        <p id="avant-clique">Cliquez sur la station de votre choix pour réserver votre vélo.</p>
+                        <ul>
+                            <li class="marker" id="station-verte"> <i class="fas fa-map-marker-alt"></i> Plus de 10 vélos disponibles dans la station</li>
+                            <li class="marker" id="station-orange"><i class="fas fa-map-marker-alt"></i> Moins de 10 vélos disponibles dans la station</li>
+                            <li class="marker" id="station-rouge"> <i class="fas fa-map-marker-alt"></i> Aucun vélo disponible dans la station</li>
+                        </ul>
+                    </div>
+                    <!-- détails station selectionnée-->
+                    <div id="station-infos">
+                        <ul>
+                            <li>Adresse : </li>
+                            <li>Nombre de places : </li>
+                            <li>Nombre de vélos disponibles : </li>
+                        </ul>
+                    </div>
+                    <!-- formulaire de resa-->
+                    <form id="form-container"> 
+                        <fieldset>
+                            <legend>Remplissez les champs ci dessous pour réserver un vélo de cette station</legend>
+                            <label for="name">Votre nom : </label><input type="text" name="name" class="input" id="name" placeholder="Votre nom" required/><br>
+                            <label for="firstname"> Votre prénom : </label><input type="text" name="firstname" class="input" id="firstname" placeholder="Votre prénom" required><br>
+                            <input type="submit" name="submit" id="reserver" value="Réserver">
+                        </fieldset>
+                    </form>
+                    <!-- pour les stations rouges, pas de vélo dispo-->
+                    <p id="nobikes"> <i class="fas fa-ban"></i>Aucun vélo n'est disponible dans cette station, sélectionnez une autre station.</p>
+                </div>
+            </div>
+            <!-- SECTION CANVAS -->
+            <!-- canvas -->
+            <div class="row" id="canvas">
+                <div class="col-md-5" id="canvas-container"> 
+                    <div id="canvas-instruction">
+                        <p>Signez pour confirmer votre réservation</p>
+                    </div>
+                    <div id="canvas-div">
+                        <canvas id="canvas-sign" width="650" height="200">Apposez votre signature: Veuillez mettre à jour votre navigateur pour pouvoir signer.</canvas>
+                    </div>
+                    <div id="canvas-button-section">
+                        <button class="bouton" type="submit" id="submit-canvas">Valider</button>
+                        <button class="bouton" type="reset" id="clear-canvas">Recommencer</button>
+                    </div>
+                </div>
+            </div>
+            <!-- SECTION CONFIRMATION RESA -->
+            <div class="row" id="message-confirmation-container">
+                <div class="col-md-12 col-sm-12">
+                    <!--BLOC MESSAGES DE CONFIRMATION / EXPIRATION -->
+                    <p id="message-confirmation">Vélo réservé à la station <span id="station-confirmee">STATION</span> par <span id="nom-confirme">NOM</span><br>
+                        Temps restant : <span id="timer"></span> avant l'expiration de la session</p>
+                    <p id="resa-expiree">Réservation expirée</p>
+                </div>
+            </div>
+            <!-- FOOTER -->
+            <footer class="row">
+                <p> © site créé par Nathalie Barreau dans le cadre d'un projet OpenClassrooms</p>
+            </footer>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js"></script>
+        <script src="js/slider.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/resa.js"></script>
+        <script src="js/canvas.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

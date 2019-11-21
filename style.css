@@ -1,0 +1,683 @@
+
+/* ------------------------ GENERAL --------------------------*/ 
+
+body {
+	font-family: "Roboto", "arial", sans-serif;
+}
+
+h1 {
+	color: rgb(250, 250, 250);
+	font-size: 30px;
+	margin: 50px 0px;
+	padding-left: 15%;
+	padding-right: 10%;
+	font-family: "Kalam", "Roboto", "arial", sans-serif;
+	font-weight: bold;
+}
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+
+	h1 {
+		font-size: 25px;
+	}
+}
+
+
+/* ------------------------- HEADER ---------------------------*/ 
+
+header [class*="col-"] {
+	background-color: rgb(36, 34, 34);
+}
+
+header .col-md-9, header .col-md-3 {
+	position: inherit;
+}
+
+#logo {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	height: 130px;
+	justify-content:  center;
+}
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+	#logo {
+		height: 100px;
+		margin-top: 30px;
+		padding-top: 0px;
+		display: block;
+	}
+
+	h1 {
+		text-align: center;
+		margin: 30px 0px;
+	}
+}
+
+/* smartphones */ 
+
+@media all and (max-width: 400px) {
+	#logo {
+		padding-bottom: 0px;
+		height: 35px;
+		margin-top: 20px;
+	}
+
+	h1 {
+		font-size: 14px;
+		padding: 0px;
+		margin: 20px 0px;
+	}
+}
+
+/* -------------------- DIAPORAMA/SLIDER ----------------------*/ 
+
+.diapo {
+	padding: 0px;
+}
+
+#diapo-container {
+	position: relative;
+	height: 550px;
+	width: 100%;
+	margin-bottom: 55px;
+	padding: 0px;
+}
+
+.slide, .slider-item, .slider-text::before, .slider-control {
+	position: absolute;
+}
+
+.slide {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+.slide img { 	
+	width: 100%;
+	height: auto;
+	min-height: 100%;
+}
+
+#slide1-background {
+	background-color: rgba(0, 0, 0, 0.3);
+	position: absolute;
+	z-index: 2;
+	height: 100%;
+	width: 100%; 
+}
+
+.slider-text {
+	z-index: 5;
+	top:30%;
+	left: 45%;
+	right: 15%;
+	padding: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	color: rgb(255, 255, 255);	
+	text-shadow: 2px 2px 4px rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* numéro étape */
+.slider-text span {
+  margin-right: 23px;
+}
+
+/* rond qui entoure le numéro */
+.slider-text::before {
+	z-index: -1;
+	content: "";
+	background-color: rgb(233, 180, 56);
+	border-radius: 100%;
+	height: 35px;
+  	width: 35px;
+	left: 18px;
+	top: 28px;
+}
+
+/* barre de progression */
+#progressbar-container{ 
+	position: absolute;
+	background-color: rgba(0,0,0,0.3);
+	width: 100%;
+	height: 6px;
+	top: 0;
+}
+
+.progressbar{
+	height: 100%;
+	width: 0;
+	background-color:rgb(233, 180, 56);
+}
+
+/* boutons prev, next et pause */
+.slider-control {
+	transform: translateX(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 6;
+	height: 50px;
+}
+
+.slider-control:hover, .slider-control:active {
+	background-color: rgb(0,0,0);
+}
+
+/*boutons prev et next*/
+.arrow-button {
+	border-radius: 50px;
+	width: 50px;
+	top: 40%;	
+	font-size: 30px;
+}
+
+/* bouton prev. */
+#slider-prev { 
+	left: 25px;
+}
+
+/* bouton next */
+#slider-next { 
+	right: -25px;
+}
+
+/* bouton pause */
+#slider-pause { 
+	width: 100%;
+	text-align: center;
+	padding-right: 15px;
+	left: 50%;
+	bottom: 0;
+	font-size: 22px;
+}
+
+/* icones prev/next et pause/play */
+.icone {
+	color: rgb(255, 255, 255);
+}
+
+.fa-angle-left {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.fa-angle-right { 
+  margin-left: 18px;
+  margin-top: 10px;
+}
+
+.fa-pause {
+	margin-left: 15px;
+	margin-top: 14px;
+}
+
+.fas.fa-play {
+	margin-left: 17px;
+	margin-top: 15px;
+}
+
+/* points sous le diaporama */
+#slider-dots { 
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	bottom: -35px;
+	left: 0;
+	right: 0;
+}
+
+.dot {
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	margin-right: 10px;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.firstdot {
+	margin-left: 10px;
+}
+
+.dot:hover, .dot:active, .dot-active {
+	background-color: rgb(233, 180, 56);
+}
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+
+	#diapo-container {
+		height: 400px;
+	}
+
+	.slider-text {
+		left: 30%;
+	}
+}
+
+/* smartphones */ 
+
+@media all and (max-width: 400px) {
+
+	#diapo-container {
+		height: 250px;
+	}
+
+	.slider-text {
+		top:20%;
+		left: 15%;
+		right: 15%;
+		padding: 30px;
+		font-size: 16px;
+	}
+
+	.slider-text::before {
+		height: 30px;
+		width: 30px;
+		left: 20px;
+		top: 28px;
+	}
+
+	.slider-control {
+		height: 35px;
+	}
+
+	.arrow-button {
+		width: 35px;
+		font-size: 25px;
+	}
+
+	#slider-prev {
+		left: 20px;
+	}
+
+	#slider-next {
+		right: -15px;
+	}
+
+	.fa-angle-left {
+		margin-left: 10px;
+		margin-top: -5px;
+	  }
+	  
+	  .fa-angle-right { 
+		margin-left: 12px;
+		margin-top: -5px;
+	  }
+
+	  .fa-pause, .fas.fa-play {
+		  margin-top: 7px;
+	  }
+}
+
+
+/* -------------------- MAP ----------------------*/ 
+
+/* container de la map + encart à côté de la map */
+#panneau-map-container {
+  height: 500px;						
+}
+
+#map-container {
+	padding: 0px;
+}
+
+#map {
+	width: 100%;
+	height:100%;
+}
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+
+	#panneau-map-container {
+		height: 400px;							
+	}
+}
+
+/* intermédiaire */ 
+@media all and (min-width:401px) and (max-width: 768px) {
+	#map-container {
+		padding: 0px 15px;
+		height: 50%;
+	}
+
+	#panneau-map-container {
+		height: 600px;	
+		margin-bottom: 100px;						
+	}
+}
+
+/* smartphones */ 
+
+@media all and (max-width: 400px) {
+	#map-container {
+		padding: 0px 15px;
+		height: 50%;
+	}
+
+	#panneau-map-container {
+		height: 600px;	
+		margin-bottom: 100px;						
+	}
+}
+
+/* -------------------- RESA ----------------------*/ 
+
+#resa-container {
+	background-color: rgb(255, 255, 255);
+}
+
+/* container avant de cliquer pour réserver */
+#consigne-avant-resa { 
+	text-align: center;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+#consigne-avant-resa ul {
+	padding-left: 0;
+}
+
+#consigne-avant-resa li {
+	list-style: none; 
+	font-size: 16px;
+	margin-bottom: 30px;
+}
+
+#avant-clique {
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+.marker {
+	font-weight: normal;
+}
+
+.fa-map-marker-alt {
+	font-size: 25px;
+	margin-right: 7px;
+}
+
+#station-verte {
+	margin-top: 30px;
+}
+
+#station-verte i {
+	color: rgb(38, 173, 35);	
+}
+
+#station-orange i {
+	color: rgb(202, 131, 38);
+}
+
+#station-rouge i{
+	color: rgb(202, 39, 59);
+}
+
+#station-infos{
+	margin: 20px;
+}
+
+#station-infos li{
+	padding-left: 2%;
+	list-style: none;
+}
+
+#form-container, #nobikes, #canvas-container, #station-infos {
+	display: none;
+}
+
+/* ------ formulaire de réservation ------ */
+
+#form-container {
+	padding: 10px;
+	background-color: rgb(36, 34, 34);
+	color: rgb(255, 255, 255);
+	margin: 20px;
+}
+
+#form-container fieldset legend {
+	font-size: 20px;
+}
+
+/*input name et firstname*/
+.input {
+	font-size: 15px;
+	padding: 5px;
+	width: 50%;
+}
+
+#name { 
+	margin-left: 30px;
+}
+
+#firstname {
+	margin-left: 7px;
+}
+
+/* pas de velo dispo */
+#nobikes { 
+	margin-left: 28px;
+	margin-top: 20px;
+	color: rgb(255, 0, 0);
+}
+
+#nobikes i {
+	padding-right: 10px;
+}
+
+/* bouton réserver */
+#reserver { 
+	cursor: pointer;
+	background-color: rgb(255, 188, 62);
+	padding: 7px 11px;
+	border: none;
+	border-radius: 3px;
+	font-size: 15px;
+}
+
+#reserver:hover {
+	background-color: rgb(233, 180, 56);
+}
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+
+	#station-infos{
+		margin: 0px;
+	}
+
+	#avant-clique {
+		font-size: 16px;
+	}
+}
+
+/* smartphones */
+
+@media all and (max-width: 400px) {
+	#consigne-avant-resa {
+		margin-top: 20px;
+	}
+
+}
+
+/* -------------------- CANVAS ----------------------*/ 
+
+#canvas {
+	justify-content: center;
+}
+
+#canvas-sign { 
+	background-color: rgb(255, 255, 255);  
+}
+
+#canvas-container { 
+	height: 350px;
+	margin: 50px 0px;
+	padding: 0;
+	border: 2px solid rgb(24, 23, 23);
+}
+
+#canvas-instruction { 
+	background-color:  rgb(36, 34, 34);
+	color: rgb(255, 255, 255);
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#canvas-div { 
+	height: 60%;
+	cursor: crosshair;
+	overflow: hidden;
+}
+
+#canvas-button-section{ 
+	background-color:rgb(238, 238, 238);
+	height: 59px;
+	justify-content: center;
+	display: flex;
+	line-height: 1;
+}
+
+/* bouton recommencer et valider */
+.bouton {
+	cursor: pointer;
+	border: none;
+	padding: 10px 15px;
+	margin:  10px 15px;
+	border-radius: 3px;
+	font-size: 15px;
+}
+
+#submit-canvas, #clear-canvas  {
+	background-color: rgb(255, 188, 62);
+}
+
+#clear-canvas:hover, #submit-canvas:hover {
+	background-color: rgb(233, 180, 56);
+}
+
+
+/* tablettes */
+
+@media all and (max-width: 768px) {
+	
+	#canvas-container {
+		margin-top: 50px;
+	}
+}
+
+/* intermédiaire */ 
+@media all and (min-width:401px) and (max-width: 768px) {
+
+	#canvas-container {
+		width: 50%;
+	}
+}
+
+/* smartphones */
+
+@media all and (max-width: 400px) {
+
+	#canvas-container {
+		margin-top: 80px;
+	}
+
+	#canvas {
+		margin: 10px;
+	}
+
+	#canvas-instruction p {
+		text-align: center;
+	}
+}
+
+/* -------------------- RESA CONFIRM ----------------------*/ 
+
+/* message confirmation de résa, timer et expiration de la résa */
+
+#message-confirmation-container .col-md-12 {
+	padding: 0px;
+}
+
+#message-confirmation, #resa-expiree { 
+	display: none;
+	background-color: rgb(238, 238, 238);
+	padding: 20px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#nom-confirme {
+	text-transform: uppercase;
+}
+
+#timer { 
+	color: rgb(202, 35, 54);
+}
+
+
+/* smartphones */
+
+@media all and (max-width: 400px) {
+
+	#message-confirmation {
+		margin-top: 80px;
+	}
+}
+
+
+/* -------------------- FOOTER ----------------------*/ 
+
+footer {
+	background-color: rgb(36, 34, 34);
+	margin-top: 30px;
+	justify-content: center;
+	height: 100px;   
+}
+
+footer p {
+	padding-top: 35px;
+	font-size: 14px;
+	color: rgb(255, 255, 255);
+}
+
+
+/* tablettes */ 
+
+@media all and (max-width: 768px) {
+
+	footer {
+		display: block;
+	}
+
+}
+
+/* smartphones */ 
+
+@media all and (max-width: 420px) {
+
+	footer {
+		margin-top: 80px;
+	}
+
+	footer p {
+		text-align: center;
+		margin: 0px 20px ;
+	}
+
+}
